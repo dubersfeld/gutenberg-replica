@@ -21,7 +21,7 @@ All orders can be persisted with a state that can be: CART, PRE_AUTHORIZE, PRE_S
 
 A user can see other books most frequently bought with the books she plans to buy. A user can vote for the reviews written for these books
 
-In addition to the main application a standalone application GutenbergReplicaMonitor displays the current status of the replica set. It runs on a different port 8090 with context path gutenberg-admin.   
+In addition to the main application a standalone application GutenbergReplicaMonitor displays the current status of the replica set. It runs on a different port 8090 with context path gutenberg-admin. Stomp over websockets is used for status display.   
 
 A full tutorial for this project can be found on this page:
 
