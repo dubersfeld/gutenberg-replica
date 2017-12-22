@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/header::header(title='home')">
+</head>
+
+<body>
+            
+	<h1>
+    	<span th:text="'Welcome ' + ${username}"></span>
+  	</h1>
+
+  	<br /><br />
+  	<a th:href="@{/logout}" th:text="'Sign Out'"></a>
+    <br /><br />
+    
+
+	<a th:href="@{/replicaSetMonitor}" th:text="'To Replica Set Monitor'"></a>
+  
+	     
+    <br /><br />
+    <div th:replace="fragments/footer::footer"></div>
+    
+</body>
+</html>

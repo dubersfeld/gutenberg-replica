@@ -1,0 +1,4 @@
+src/main/resources/templates/admin/mongodb.html:			stompClient.send("/my-app/chat-room",{},JSON.stringify(chatMessage));
+src/main/resources/application.properties:dub.ws.mapping=/chat-room
+target/classes/templates/admin/mongodb.html:			stompClient.send("/my-app/chat-room",{},JSON.stringify(chatMessage));
+target/classes/application.properties:dub.ws.mapping=/chat-room
