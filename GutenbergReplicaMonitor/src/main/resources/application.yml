@@ -1,0 +1,30 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /gutenberg-admin
+
+# Spring WebSockets
+spring:
+  aop:
+    proxy-target-class: true
+ 
+# dub WebSockets
+dub:
+  ws: 
+    host: localhost
+    port: 8090
+    context-path: /gutenberg-admin
+    endpoint: /stomp-endpoint
+    app-destination-prefix: /my-app
+    mapping: /monitor
+    mapping-reply: ${dub.ws.topic}${dub.ws.mapping}
+    topic: /topic
+
+  mongo:
+    hostports: localhost:40000,localhost:40001,localhost:40002/?replicaSet=gutenberg&readPreference=nearest
+
+    admin-database: gutenbergAdmin
+
+    authentication-host: localhost
+    authentication-port: 27017
+

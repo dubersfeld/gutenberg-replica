@@ -16,9 +16,13 @@
 	var monitorUrl = "" + /*[[${monitorUrl}]]*/;
 	var mappingReply = "" + /*[[${mappingReply}]]*/;
 	
+	console.log("monitorUrl " + monitorUrl);
+	console.log("mappingReply " + mappingReply);
+	
 	function membersData(members) {
-		var data = [["_id", "name", "stateStr", "electionDate"]];
-		
+		var headerRow = ["_id", "name", "stateStr", "electionDate"];
+		var data = [headerRow];
+
 		for (var i = 0; i < members.length; i++) {
 			var row = [ members[i]['_id'], members[i]["name"], members[i]["stateStr"], members[i]["electionDate"] ? new Date(members[i]["electionDate"]) : ""];
 			data.push(row); 
@@ -26,7 +30,23 @@
 		return data;
 	}
 	
+	function alarmData(list) {
+		var headerRow = ["address", "type", "state"];
+		var data = [headerRow];
+		for (var i = 0; i < list.length; i++) {
+			var row = [ list[i]['address'], list[i]["type"], list[i]["state"] ];
+			data.push(row); 
+		}
+		return data;
+		
+	}
+	
+	
 	function createMembersTable(container, data) {
+		if (data == null) {
+			// nothing to display
+			return;
+		}
 		console.log('members: ' + data.length);
 		var table = $("<table/>");
 		
@@ -37,12 +57,29 @@
 			});
 			table.append(row);
 		});
-		console.log('Fucking create completed');
+		console.log('create members completed');
 		return container.append(table);
 	}
 	
+	function createAlarmTable(container, data) {
+		console.log('alarm: ' + data.length);
+		var table = $("<table/>");
+		
+		$.each(data, function(rowIndex, r) {
+			var row = $("<tr/>");
+			$.each(r, function(colIndex, c) {
+				row.append($("<t" + (rowIndex == 0 ? "h" : "d") + "/>").text(c));
+			});
+			table.append(row);
+		});
+		console.log('create alarm completed');
+		return container.append(table);
+	}
+	
+	
+	
 	$(function() {
-		console.log("Fucking monitorUrl " + monitorUrl);
+		console.log("monitorUrl " + monitorUrl);
 		var socket = new SockJS(monitorUrl);
 	    var stompClient = Stomp.over(socket);
 	    
@@ -50,24 +87,51 @@
 	    	console.log('Connected: ' + frame);
 	    	console.log('mappingReply: ' + mappingReply);	  
 	    	stompClient.subscribe(mappingReply, function (data) {	    		       	
-	    			console.log('>>>>> ' + data);
-	        		var json = JSON.parse(data.body);
-	        		console.log('Fucking json ' + json);
+	    		console.log('>>>>> ' + data);
+	        	var jsonWrap = JSON.parse(data.body);
+	        	var json = null;
+	        	if (jsonWrap["code"] == "OK") {
+	        		// normal case
+	        		console.log("BINGO")
+	        		json = jsonWrap["payload"];
+	        		console.log('json ' + JSON.stringify(json));
 	        		$("#set").empty();
 	        		$("#number").empty();
 	        		$("#members").empty();
+	        		$("#alarm").empty();
 	        		$("#set").append("<span><strong>" + json.set +"</strong></span><br/>");
 	        		$("#number").append("<span><strong>" + json.members.length +"</strong></span><br/>");
 	        		var members = json.members;
-	        		console.log("Fucking members: " + members);
+	        		console.log("members: " + members);
 	    			var data = membersData(members);
 	    			console.log(data);
 	    			console.log(new Date(json.date))
 	    			createMembersTable($("#members"), data);
-	    	
+	        	} else {
+	        		// exception handling
+	        		$("#alarm").empty();
+	        		$("#members").empty(); 
+	        		console.log("alarm received");
+	        		json = jsonWrap["payload"];
+	        		if (json != null) {
+	        			$("#alarm").append("<span><strong>NO PRIMARY NODE FOUND! PLEASE START A NEW NODE!</strong></span><br />");
+	 			       
+	        			console.log('json ' + JSON.stringify(json));
+		        		console.log('length ' + json.length);
+		        		var data = alarmData(json);
+		        		console.log("data " + data);
+		        		//$("#alarm").append("<span><strong>NO PRIMARY NODE FOUND! PLEASE START A NEW NODE!</strong></span><br />");
+		        		createAlarmTable($("#members"), data);
+		   
+	        		}
+	        		   
+	        	}// if
+	    	}, () => {
+	    		console.log("message: " + message)
 	    	});    
 	    });
 	});
+	
 	
 	/*]]>*/
 	</script>
@@ -97,6 +161,8 @@
 						  <p><strong>Number of Members:</strong>	
 						  <span id="number"></span></p>  
 						</div>
+						<div id="alarm">
+						</div>
 						<div id="members">
 						</div>
 				  	</div>
@@ -104,6 +170,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-conn = new Mongo("localhost:40000");
+conn = new Mongo("localhost:40001");
 
 db = conn.getDB("gutenbergRS");
 
@@ -742,7 +742,7 @@ db.users.insert(
     "_id" : ObjectId("5a28f2b2acc04f7f2e9740af"),
     "_class" : "com.dub.spring.domain.MyUser",
     "username" : "Albert",
-    "hashedPassword" : BinData(0,"JDJhJDEwJFBGSDFRMHJmbXJ2cWoxSC5KNk81VHVTWUx0RjU0Nml4TUVjYUh3RndPd1hpOHVNMDBnVDdL"),
+    "hashedPassword" : BinData(0,"JDJhJDEwJHNnNVZCdTEzMVo5RlJwdmlHUFFpN2VPZXd4SmRzNkxPVk1wMFBBSS9MaFZrcU9kV3BkZ3k2"),
     "accountNonExpired" : true,
     "accountNonLocked" : true,
     "credentialsNonExpired" : true,
@@ -773,7 +773,7 @@ db.users.insert(
     "_id" : ObjectId("5a28f2b2acc04f7f2e9740b0"),
     "_class" : "com.dub.spring.domain.MyUser",
     "username" : "Werner",
-    "hashedPassword" : BinData(0,"JDJhJDEwJHFDM255UDhkUGRkTmFId0xXcE5zWE9mT0pRYzhGdU1rSURPOUxNMmN6aEkxdkx3aW12d2ky"),
+    "hashedPassword" : BinData(0, "JDJhJDEwJFNHT2g2RlpVTHZKOXFJNTR3S2xhQ09SalhvY0c4SllqelNidjhQWGNOQmEzclVUQWM1ZWF1"),
     "accountNonExpired" : true,
     "accountNonLocked" : true,
     "credentialsNonExpired" : true,
@@ -846,7 +846,7 @@ db.users.insert(
     "_id" : ObjectId("5a28f2ddacc04f7f2e9740b2"),
     "_class" : "com.dub.spring.domain.MyUser",
     "username" : "Richard",
-    "hashedPassword" : BinData(0,"JDJhJDEwJGlxQW1CTUN0YzhURXFBa0c0My5YSmVBMnA3MGFQVllZZkIvNkZ6ZGhPRmVCblQuZTFtR2Zp"),
+    "hashedPassword" : BinData(0,"JDJhJDEwJDE0dFF3ZDVuNS5OSy43RENZWEJrUE91NDhXM3dNMngyU0NHNzl1dUhzQlh2SlBQcHAxb1k2"),
     "accountNonExpired" : true,
     "accountNonLocked" : true,
     "credentialsNonExpired" : true,

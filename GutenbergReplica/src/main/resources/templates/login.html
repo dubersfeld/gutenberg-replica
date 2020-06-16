@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="fragments/header::header(title='home')">
+<head th:replace="fragments/header::header(title='login')">
 </head>
 
 
 <body>
 
-	<nav th:replace="fragments/header::language"></nav>
-	
 	  <div th:if="${loginFailed != null}" th:text="'Username or password not valid'"></div>
 	
  			<form th:action="@{/login}" method="post">

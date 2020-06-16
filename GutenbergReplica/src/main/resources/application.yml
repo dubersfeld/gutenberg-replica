@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  
+  servlet:
+    context-path: /gutenberg
+
+spring:
+  data:
+    mongodb:
+      port: 40000
+      database: gutenbergRS
+
+# Replica set seed
+dub:
+  mongo:
+    hostports: localhost:40000,localhost:40001,localhost:40002
+
+
+
+
+
+

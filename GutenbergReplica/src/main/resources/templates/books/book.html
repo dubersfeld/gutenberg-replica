@@ -13,7 +13,7 @@
            
     <p>
       <span th:text="'authors: '"></span>
-      <span th:each="author : ${book.authors}" th:text="${author}"></span>
+      <span th:each="author : ${book.authors}" th:text="${author} + ' '"></span>
     </p>
         
 	<p><span th:text="'publisher: '"></span><span th:text="${book.publisher}">publisher</span></p>
