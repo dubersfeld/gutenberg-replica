@@ -4,7 +4,7 @@ A MongoDB based e-commerce site demo with Spring Boot support and replication.
 I present here a MongoDB based e-commerce web site demo. The focus is on MongoDB Spring Boot support. The prequisites for running this project are:
 
 A recent Maven version.
-A recent Spring Boot version (I use version 3.2).
+A recent Spring Boot version (I use version 2.3).
 A recent MongoDB version (I use v4.2.7).
 
 The database gutenbergRS used in this demo can be prepopulated using the attached Javascript file gutenbergRS.js. It has to be loaded on port 40000 after the initialization of the replica set. A separate database named gutenbergAdmin is used for authentication only on default port 27017. It can be prepopulated using the file gutenbergAdmin.js. 
